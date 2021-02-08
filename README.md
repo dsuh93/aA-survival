@@ -52,10 +52,11 @@ The scripts that will be used in this game include:
   - the entry file
   - `game.js`: handles the logic for when items fall and how fast they fall
   - `player.js`: handles rendering and animation and controls of the game sprite
-  - `items.js`: handles logic behind all of the various items in the game that influence point system        and clock
+  - `items.js`: handles logic behind all of the various items in the game that influence point system and clock
   - `score.js`: handles logic behind how the score and timing goes when items are picked up by player
  
 # Implementation Timeline
+
 **Day 1**: setup all files and directories and make sure a game is able to render on the browser.
   Goals for the day:
   - make sure the skeleton for the board, the player, and all of the items are done
@@ -63,10 +64,12 @@ The scripts that will be used in this game include:
   - research how to render the items randomly and how to make them fall
   - build out all necessary html and canvas skeletons
   - research how to add audio
+  
 **Day 2**: build out the game sprite and get it to move with the key controls.
   Goals for the day:
    - get the sprite to move, making sure the velocity for each move is the desired amount.
-   - figure out how to make items collide with the player and make each change to the score                  respectively
+   - figure out how to make items collide with the player and make each change to the score respectively
+   
 **Day 3**: Finish up game logic so that the difficulty increases based on each exam picked up by player
   Goals for the day:
   - get the start, pause, and game over functionality done
