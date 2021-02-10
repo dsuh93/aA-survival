@@ -1,12 +1,14 @@
 body {
+  background-image: linear-gradient(rgb(255, 123, 0), yellow);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 #canvas {
-  border: 1px solid black;
+  border: 25px solid gray;
 }
 
 img {

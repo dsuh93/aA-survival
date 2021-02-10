@@ -5,28 +5,33 @@ class Sprite {
     // this.sprite = document.getElementById("sprite-standing-2");
     this.width = 100;
     this.height = 100;
-
-    this.maxSpeed = 7;
+    this.direction = "left";
+    this.jumping = false;
+    this.maxSpeed = 8;
     this.speed = 0;
     this.vertical = 0;
     this.constants = {
-      gravity: 0.4,
-      jumpSpeed: -8,
+      gravity: 0.7,
+      jumpSpeed: -15,
       terminalVelocity: 12
     }
 
     this.position = {
       x: gameWidth / 2 - this.width / 2,
-      y: gameHeight - this.height - 10,
+      y: gameHeight - this.height,
     }
   }
 
   jump() {
-    this.vertical = this.constants.jumpSpeed;
+    if (this.jumping) {
+      this.vertical = this.constants.jumpSpeed;
+    }
   }
 
   fall() {
-    this.vertical += this.constants.gravity;
+    if (this.jumping) {
+      this.vertical += this.constants.gravity;
+    }
   }
 
   moveLeft() {
@@ -39,17 +44,26 @@ class Sprite {
 
   stop() {
     this.speed = 0;
-    this.vertical = 0;
   }
 
 
   draw(ctx, frames) {
-    let sprite = document.getElementById("sprite-standing-2");
-    if (frames % 30 == 0) {
-      this.sprite = document.getElementById("sprite-standing-1");
-    } else {
-      this.sprite = document.getElementById("sprite-standing-2");
+    let sprite;
+    if (this.direction === "left") {
+      if (frames < 15 || (frames >= 30 && frames < 45)) {
+        sprite = document.getElementById("lt-sprite-standing-1");
+      } else {
+        sprite = document.getElementById("lt-sprite-standing-2");
+      }
+    } else if (this.direction === "right") {
+      if (frames < 15 || (frames >= 30 && frames < 45)) {
+        sprite = document.getElementById("rt-sprite-standing-1")
+      } else {
+        sprite = document.getElementById("rt-sprite-standing-2")
+      }
     }
+    ctx.strokeRect(this.position.x + 25, this.position.y + 25, this.width -50, this.height -35)
+    ctx.stroke();
     ctx.drawImage(sprite, this.position.x, this.position.y, 100, 100)
   }
 
@@ -57,21 +71,18 @@ class Sprite {
     if(!deltaTime) return;
     this.position.x += this.speed;
     this.position.y += this.vertical;
-    if (this.position.x < 0) {
-      this.position.x = 0;
+    if (this.position.x + 30 < 0) {
+      this.position.x = -30;
     }
-    if (this.position.x + this.width > this.gameWidth) {
-      this.position.x = this.gameWidth - this.width;
+    if (this.position.x + 75 > this.gameWidth) {
+      this.position.x = this.gameWidth - 75;
     }
-    // if (this.vertical < this.constants.terminalVelocity) {
-    //   this.vertical += this.constants.gravity;
-    // }
-    if (this.position.y < this.gameHeight - (1.5 * this.position.y)) {
-      this.position.y = this.gameHeight - (1.5 * this.position.y)
+    if (this.position.y < this.gameHeight - this.height - 10) {
       this.vertical += this.constants.gravity;
     }
     if (this.position.y > this.gameHeight - this.height - 10) {
       this.position.y = this.gameHeight - this.height - 10;
+      this.jumping = false;
     }
   }
 
