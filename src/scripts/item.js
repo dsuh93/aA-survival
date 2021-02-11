@@ -1,29 +1,43 @@
 const itemDimensions = [
-  {x: 256, y: 0, grab: 32, name: "laptop"},
+  {x: 256, y: 0, grab: 32, name: "laptop"}, //
   {x: 256, y: 480, grab: 32, name: "croissant"},
   {x: 416, y: 0, grab: 32, name: "error"},
   {x: 0, y: 352, grab: 32, name: "coffee"},
   {x: 160, y: 160, grab: 32, name: "exam"},
   {x: 224, y: 224, grab: 32, name: "tv"},
   {name: "github", src: "./src/images/github.png"},
-
-
+  {name: "kahoot", src: "./src/images/kahoot.png"}
 ]
 
-const fallingItems = {};
+//this object will contain the only items that are rendered on the board at any given time, the max should be itemCount
+let fallingItems = {};
 
 export function drawItems(ctx, itemCount, gameWidth, gameHeight) {
-  // let items = itemDimensions;
-  // let item = items[Math.floor(Math.random() * items.length)];
-  itemDimensions.forEach(item => {
-    fallingItems[item.name] ||= new Item(gameWidth, gameHeight)
-    fallingItems[item.name].update();
-    fallingItems[item.name].drawItems(ctx, item);
+  let items = itemDimensions;
+  let randomItem = items[Math.floor(Math.random() * items.length)];
+  if(Object.keys(fallingItems).length < itemCount) {
+    fallingItems[randomItem.name] ||= new Item(gameWidth, gameHeight, randomItem)
+  }
+  Object.keys(fallingItems).forEach(item => {
+    if (fallingItems[item].status == 0) {
+      delete fallingItems[item];
+    } else {
+      fallingItems[item].update();
+      fallingItems[item].drawItems(ctx)
+    }
   })
+  // if Object.keys(fallingItems.length < itemCount), add random item from itemDimension to fallingItems
+  // if Object.keys(fallingItems.length == itemCount)
+  // and if Object
+  // itemDimensions.forEach(item => {
+  //   fallingItems[item.name] ||= new Item(gameWidth, gameHeight)
+  //   fallingItems[item.name].update();
+  //   fallingItems[item.name].drawItems(ctx, item);
+  // })
 }
 
 class Item {
-  constructor(gameWidth, gameHeight) {
+  constructor(gameWidth, gameHeight, randomItem) {
     this.width = 45;
     this.height = 45;
     this.gameWidth = gameWidth;
@@ -35,9 +49,11 @@ class Item {
     this.speed = 0;
     this.fallingSpeed = 3;
     this.status = 1;
+    this.randomItem = randomItem;
   }
 
-  drawItems(ctx, {x, y, grab, name, src}) {
+  drawItems(ctx) {
+    let {x, y, grab, name, src} = this.randomItem;
     if (this.status == 1) {
       if(x || y) {
         let pix = new Image();
@@ -64,6 +80,16 @@ class Item {
           this.position.x, this.position.y,
           this.width, this.height,
         )
+      } else if (name == "kahoot") {
+        let pix = new Image();
+        pix.src = src;
+        ctx.drawImage(
+          pix,
+          185, 160,
+          210, 200,
+          this.position.x, this.position.y,
+          this.width, this.height
+        )
       }
     }
   }
@@ -72,9 +98,9 @@ class Item {
     this.position.y += this.fallingSpeed;
     if (this.position.y > this.gameHeight - this.height - 10) {
       this.status = 0;
-      this.position.y = -(Math.floor(Math.random() * this.gameHeight));
-      this.position.x = Math.floor(Math.random() * (this.gameWidth - this.width));
-      this.status = 1;
+      // this.position.y = -(Math.floor(Math.random() * this.gameHeight));
+      // this.position.x = Math.floor(Math.random() * (this.gameWidth - this.width));
+      // this.status = 1;
     }
   }
 }
