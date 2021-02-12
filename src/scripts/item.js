@@ -1,12 +1,13 @@
 const itemDimensions = [
-  {x: 256, y: 0, grab: 32, name: "laptop"}, //
-  {x: 256, y: 480, grab: 32, name: "croissant"},
-  {x: 416, y: 0, grab: 32, name: "error"},
-  {x: 0, y: 352, grab: 32, name: "coffee"},
-  {x: 160, y: 160, grab: 32, name: "exam"},
-  {x: 224, y: 224, grab: 32, name: "tv"},
-  {name: "github", src: "./src/images/github.png"},
-  {name: "kahoot", src: "./src/images/kahoot.png"}
+  {x: 256, y: 0, grab: 32, name: "laptop"}, // +10 pts
+  {x: 256, y: 480, grab: 32, name: "croissant"}, // +5 pts
+  {x: 416, y: 0, grab: 32, name: "error"}, // -5 pts
+  {x: 0, y: 352, grab: 32, name: "coffee"}, // +3 sec
+  {x: 160, y: 160, grab: 32, name: "exam"}, // +10 pts
+  {x: 224, y: 224, grab: 32, name: "tv"}, // -5 pts
+  {x: 224, y: 672, grab: 32, name: "hacker"}, // -1 life
+  {name: "github", src: "./src/images/github.png"}, // +5 pts
+  {name: "kahoot", src: "./src/images/kahoot.png"} // +5 pts
 ]
 
 //this object will contain the only items that are rendered on the board at any given time, the max should be itemCount
