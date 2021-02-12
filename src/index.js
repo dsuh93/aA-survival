@@ -25,7 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let landingModal = true;
   let pauseModal = false;
   new InputHandler(imgSprite);
-  let modalImg = document.getElementById('items');
+  let body = document.getElementById("body");
+  let title = document.getElementById("title");
 
   function drawLevel(ctx) {
     ctx.font = "20px Arial";
@@ -82,6 +83,10 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.fillStyle = "skyblue";
     ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
     alert(`GAME OVER!! Your score was: ${score.score}`);
+    body.classList.remove("start");
+    body.classList.add("gameover");
+    title.classList.remove("start");
+    title.classList.add("gameover");
     drawModal(ctx);
   }
 
@@ -89,7 +94,8 @@ document.addEventListener("DOMContentLoaded", () => {
     animated = true;
     landingModal = false;
     if (animated) {
-      debugger
+      body.classList.add("start");
+      title.classList.add("start");
       gameLoop(lastTime);
       requestAnimationFrame(gameLoop)
     }
@@ -162,12 +168,12 @@ document.addEventListener("DOMContentLoaded", () => {
       ctx.fillStyle = "white";
       ctx.fillText("Paused", 300, 200)
     } else if (lives == 0) {
-      ctx.fillStyle = "skyblue";
+      ctx.fillStyle = "black";
       ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
       ctx.font = "small-caps 50px Arial";
-      ctx.fillStyle = "black";
-      ctx.fillText("Try again?", 300, 200);
-      ctx.fillText("Hit Enter", 300, 400);
+      ctx.fillStyle = "white";
+      ctx.fillText("Try again?", 280, 200);
+      ctx.fillText("Hit Enter", 290, 400);
     }
   }
   

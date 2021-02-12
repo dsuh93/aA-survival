@@ -61,8 +61,6 @@ class Sprite {
         sprite = document.getElementById("rt-sprite-standing-2")
       }
     }
-    ctx.strokeRect(this.position.x + 25, this.position.y + 25, this.width -50, this.height -35)
-    ctx.stroke();
     ctx.drawImage(sprite, this.position.x, this.position.y, 100, 100)
   }
 

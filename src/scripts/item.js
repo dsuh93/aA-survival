@@ -30,57 +30,56 @@ export function drawItems(ctx, itemCount, level, gameWidth, gameHeight) {
 }
 
 export function drawModalItems(ctx) {
-  let cx = 100;
-  let cy = 225;
   let items = itemDimensions;
-  items.slice(0, 6).forEach(goodItem => {
+  items.slice(0, 6).forEach((goodItem, i) => {
     debugger
     let {x, y, grab, name, src} = goodItem;
     let modalImg = new Image();
     if (src) {
       modalImg.src = src;
-      if (name == "github") {
+      modalImg.onload = function() {
+        if (name == "github") {
+          ctx.drawImage(
+            modalImg,
+            100 + (70 * i), 225,
+            45, 45
+          );
+        } else if (name == "kahoot") {
+          ctx.drawImage(
+            modalImg,
+            185, 160,
+            210, 200,
+            100 + (70 * i), 225,
+            45, 45
+          );
+        }
+      }
+    } else {
+      modalImg.src = "./src/images/items.png";
+      modalImg.onload = function() {
         ctx.drawImage(
           modalImg,
-          cx, cy,
-          45, 45
-        );
-      } else if (name == "kahoot") {
-        ctx.drawImage(
-          modalImg,
-          185, 160,
-          210, 200,
-          cx, cy,
-          45, 45
+          x, y,
+          grab, grab,
+          100 + (70 * i), 225,
+          45, 45,
         );
       }
-      cx += 70;
-    } else {
-      modalImg.src = "src/images/items.png";
+    }
+  })
+  items.slice(6).forEach((badItem, i) => {
+    let {x, y, grab} = badItem;
+    let modalImg = new Image();
+    modalImg.src = "./src/images/items.png";
+    modalImg.onload = function() {
       ctx.drawImage(
         modalImg,
         x, y,
         grab, grab,
-        cx, cy,
-        45, 45,
+        100 + (70 * i), 325,
+        45, 45
       );
-      cx += 70;
     }
-  })
-  cx = 100;
-  cy = 325;
-  items.slice(6).forEach(badItem => {
-    let {x, y, grab} = badItem;
-    let modalImg = new Image();
-    modalImg.src = "src/images/items.png";
-    ctx.drawImage(
-      modalImg,
-      x, y,
-      grab, grab,
-      cx, cy,
-      45, 45
-    );
-    cx += 70;
   })
 }
 
@@ -107,8 +106,6 @@ class Item {
       if(x || y) {
         let pix = new Image();
         pix.src = "src/images/items.png";
-        ctx.fillStyle = "lightblue";
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
         ctx.drawImage(
           pix,
           x, y, 
