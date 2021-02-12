@@ -86,18 +86,21 @@ document.addEventListener("DOMContentLoaded", () => {
     animated = true;
     landingModal = false;
     if (animated) {
+      debugger
+      // gameLoop(timestamp);
       requestAnimationFrame(gameLoop)
     }
   }
 
   function pauseGame() {
     if (animated) {
+      debugger
       animated = false;
       pauseModal = true;
+      drawModal();
     } else {
-      animated = true;
       pauseModal = false;
-      requestAnimationFrame(gameLoop)
+      startGame();
     }
   }
 
@@ -130,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function drawModal(ctx) {
+    debugger
     if (!animated && landingModal) {
       ctx.fillStyle = "skyblue";
       ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
@@ -142,27 +146,33 @@ document.addEventListener("DOMContentLoaded", () => {
       ctx.fillStyle = "black";
       ctx.fillText("Hit Enter to start!!", 100, 500)
     } else if (!animated && pauseModal) {
-      ctx.fillStyle = "rgba(255, 255, 255, 0.3";
+      debugger
+      ctx.fillStyle = "rgba(0, 0, 0, 0.3";
       ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+      ctx.fill();
+
       ctx.font = "small-caps 50px Arial";
       ctx.fillStyle = "white";
       ctx.fillText("Paused", 200, 200)
     }
   }
   
-  drawModal(ctx);
-
+  
   document.addEventListener("keydown", e => {
+    debugger
     switch (e.key) {
       case "Enter":
-        if (animated = false) {
+        debugger
+        if (!animated) {
           startGame();
         }
         break;
       case " ":
+        debugger
         pauseGame();
         break;
     }
   })
 
+  drawModal(ctx);
 })
