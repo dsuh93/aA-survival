@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
               if (item.name == "exam") {
                 level++;
                 itemCount += 1;
+                item.fallingSpeed++;
               }
               if (item.name == "hacker") {
                 lives--;
