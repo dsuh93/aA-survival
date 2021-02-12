@@ -25,7 +25,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   function collisionDetection() {
-    Object.keys(fallingItems).forEach()
+    Object.keys(fallingItems).forEach(key => {
+      let item = fallingItems[key];
+      let ix = item.position.x;
+      let iy = item.position.y;
+      let iw = item.width;
+      let ih = item.height;
+      let sprite = imgSprite;
+      let x = sprite.position.x;
+      let y = sprite.position.y;
+      let w = sprite.width;
+      let h = sprite.height;
+      if (item.status == 1) {
+        for (let i = x; i < (x + w); i++) {
+          for (let j = y; j < (y + h); j ++) {
+            if (i > ix && i < (ix + iw) && j > iy && j < (iy + ih)) {
+              item.status = 0;
+            }
+          }
+        }
+      }
+    })
   }
 
   function gameLoop(timestamp) {
@@ -38,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     bg.draw(ctx, bgframes);
     drawItems(ctx, itemCount, GAME_WIDTH, GAME_HEIGHT)
     imgSprite.draw(ctx, frames);
+    collisionDetection();
     if (frames == 60) {
       frames = 0;
     } else {
