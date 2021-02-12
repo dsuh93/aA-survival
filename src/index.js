@@ -21,6 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let lastTime = 0;
   let frames = 0;
   let bgframes = 0;
+  let animated = false;
+  let landingModal = true;
+  let pauseModal = false;
   new InputHandler(imgSprite);
 
   function drawLevel(ctx) {
@@ -76,11 +79,26 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
     ctx.fillStyle = "skyblue";
     ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-    alert(`GAME OVER!! Your score was: ${score}`);
+    alert(`GAME OVER!! Your score was: ${score.score}`);
   }
 
   function startGame() {
-    document.location.reload();
+    animated = true;
+    landingModal = false;
+    if (animated) {
+      requestAnimationFrame(gameLoop)
+    }
+  }
+
+  function pauseGame() {
+    if (animated) {
+      animated = false;
+      pauseModal = true;
+    } else {
+      animated = true;
+      pauseModal = false;
+      requestAnimationFrame(gameLoop)
+    }
   }
 
   function gameLoop(timestamp) {
@@ -111,5 +129,40 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(gameLoop);
   }
 
-  requestAnimationFrame(gameLoop);
+  function drawModal(ctx) {
+    if (!animated && landingModal) {
+      ctx.fillStyle = "skyblue";
+      ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+      ctx.font = "20px Arial";
+      ctx.fillStyle = "black";
+      ctx.fillText("Welcome to aA Survival!!", 100, 100);
+      ctx.fillText("Try and get the highest score by collecting these items: ", 100, 200);
+      ctx.fillText("and avoiding these items: ", 100, 300);
+      ctx.font = "small-caps 20px Arial";
+      ctx.fillStyle = "black";
+      ctx.fillText("Hit Enter to start!!", 100, 500)
+    } else if (!animated && pauseModal) {
+      ctx.fillStyle = "rgba(255, 255, 255, 0.3";
+      ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+      ctx.font = "small-caps 50px Arial";
+      ctx.fillStyle = "white";
+      ctx.fillText("Paused", 200, 200)
+    }
+  }
+  
+  drawModal(ctx);
+
+  document.addEventListener("keydown", e => {
+    switch (e.key) {
+      case "Enter":
+        if (animated = false) {
+          startGame();
+        }
+        break;
+      case " ":
+        pauseGame();
+        break;
+    }
+  })
+
 })
