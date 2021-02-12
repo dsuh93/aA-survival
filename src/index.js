@@ -1,7 +1,7 @@
 import './styles/index.scss';
 import InputHandler from './scripts/input';
 import Sprite from './scripts/sprite';
-import {fallingItems, drawItems} from './scripts/item';
+import {fallingItems, drawItems, drawModalItems} from './scripts/item';
 import Background from './scripts/background';
 import Score from './scripts/score';
 
@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let landingModal = true;
   let pauseModal = false;
   new InputHandler(imgSprite);
+  let modalImg = document.getElementById('items');
 
   function drawLevel(ctx) {
     ctx.font = "20px Arial";
@@ -76,10 +77,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function gameOver() {
+    animated = false;
     ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
     ctx.fillStyle = "skyblue";
     ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
     alert(`GAME OVER!! Your score was: ${score.score}`);
+    drawModal(ctx);
   }
 
   function startGame() {
@@ -87,17 +90,18 @@ document.addEventListener("DOMContentLoaded", () => {
     landingModal = false;
     if (animated) {
       debugger
-      // gameLoop(timestamp);
+      gameLoop(lastTime);
       requestAnimationFrame(gameLoop)
     }
   }
 
   function pauseGame() {
+    debugger
     if (animated) {
       debugger
       animated = false;
       pauseModal = true;
-      drawModal();
+      drawModal(ctx);
     } else {
       pauseModal = false;
       startGame();
@@ -105,31 +109,33 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function gameLoop(timestamp) {
-    let deltaTime = timestamp - lastTime;
-    lastTime = timestamp;
-
-    ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-    bg.update(deltaTime);
-    imgSprite.update(deltaTime);
-    bg.draw(ctx, bgframes);
-    drawItems(ctx, itemCount, level, GAME_WIDTH, GAME_HEIGHT)
-    score.drawScore(ctx);
-    drawLevel(ctx);
-    drawLives(ctx);
-    imgSprite.draw(ctx, frames);
-    collisionDetection();
-    if (frames == 60) {
-      frames = 0;
-    } else {
-      frames++;
+    if (animated) {
+      let deltaTime = timestamp - lastTime;
+      lastTime = timestamp;
+  
+      ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+      bg.update(deltaTime);
+      imgSprite.update(deltaTime);
+      bg.draw(ctx, bgframes);
+      drawItems(ctx, itemCount, level, GAME_WIDTH, GAME_HEIGHT)
+      score.drawScore(ctx);
+      drawLevel(ctx);
+      drawLives(ctx);
+      imgSprite.draw(ctx, frames);
+      collisionDetection();
+      if (frames == 60) {
+        frames = 0;
+      } else {
+        frames++;
+      }
+      if (bgframes == 140) {
+        bgframes = 0;
+      } else {
+        bgframes++;
+      }
+      
+      requestAnimationFrame(gameLoop);
     }
-    if (bgframes == 140) {
-      bgframes = 0;
-    } else {
-      bgframes++;
-    }
-
-    requestAnimationFrame(gameLoop);
   }
 
   function drawModal(ctx) {
@@ -145,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ctx.font = "small-caps 20px Arial";
       ctx.fillStyle = "black";
       ctx.fillText("Hit Enter to start!!", 100, 500)
+      drawModalItems(ctx);
     } else if (!animated && pauseModal) {
       debugger
       ctx.fillStyle = "rgba(0, 0, 0, 0.3";
@@ -153,7 +160,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       ctx.font = "small-caps 50px Arial";
       ctx.fillStyle = "white";
-      ctx.fillText("Paused", 200, 200)
+      ctx.fillText("Paused", 300, 200)
+    } else if (lives == 0) {
+      ctx.fillStyle = "skyblue";
+      ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+      ctx.font = "small-caps 50px Arial";
+      ctx.fillStyle = "black";
+      ctx.fillText("Try again?", 300, 200);
+      ctx.fillText("Hit Enter", 300, 400);
     }
   }
   
@@ -163,7 +177,9 @@ document.addEventListener("DOMContentLoaded", () => {
     switch (e.key) {
       case "Enter":
         debugger
-        if (!animated) {
+        if (!animated && lives == 0) {
+          document.location.reload();
+        } else if (!animated) {
           startGame();
         }
         break;
@@ -176,3 +192,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   drawModal(ctx);
 })
+
+// import './styles/index.scss';
+// import Game from './scripts/game';
+// import ModalItems from './scripts/modal';
+
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   let game = new Game();
+//   const modal = new ModalItems();
+//   modal.drawModalItems();
+//   const enter = document.getElementById("landing-modal");
+//   let enterCount = 0;
+//   document.addEventListener("keydown", e => {
+//     switch (e.key) {
+//       case "Enter":
+//         debugger
+//         enter.classList.add("hidden");
+//         if (enterCount <= 1) {
+//           enterCount += 1;
+//           game.startGame();
+//         }
+//         break;
+//       case " ":
+//         game.pauseGame();
+//         break;
+//     }
+//   })
+  
+// })

@@ -29,6 +29,62 @@ export function drawItems(ctx, itemCount, level, gameWidth, gameHeight) {
   })
 }
 
+export function drawModalItems(ctx) {
+  debugger
+  let cx = 100;
+  let cy = 225;
+  let items = itemDimensions;
+  items.slice(0, 6).forEach(goodItem => {
+    let {x, y, grab, name, src} = goodItem;
+    let modalImg = new Image();
+    if (src) {
+      modalImg.src = src;
+      if (name == "github") {
+        ctx.drawImage(
+          modalImg,
+          cx, cy,
+          45, 45
+        )
+      }
+      if (name == "kahoot") {
+        ctx.drawImage(
+          modalImg,
+          185, 160,
+          210, 200,
+          cx, cy,
+          45, 45
+        )
+      }
+      cx += 70;
+    } else {
+      modalImg.src = "./src/images/items.png";
+      ctx.drawImage(
+        modalImg,
+        x, y,
+        grab, grab,
+        cx, cy,
+        45, 45,
+      )
+      cx += 70
+    }
+  })
+  cx = 100;
+  cy = 325;
+  items.slice(6).forEach(badItem => {
+    let {x, y, grab} = badItem;
+    let modalImg = new Image();
+    modalImg.src = "./src/images/items.png";
+    ctx.drawImage(
+      modalImg,
+      x, y,
+      grab, grab,
+      cx, cy,
+      45, 45
+    )
+    cx += 70;
+  })
+}
+
 class Item {
   constructor(gameWidth, gameHeight, randomItem, level) {
     this.width = 45;
@@ -40,7 +96,7 @@ class Item {
       y: -(Math.floor(Math.random() * this.gameHeight))
     }
     this.speed = 0;
-    this.fallingSpeed = 3;
+    this.fallingSpeed = 2;
     this.status = 1;
     this.randomItem = randomItem;
     this.name = randomItem.name;
