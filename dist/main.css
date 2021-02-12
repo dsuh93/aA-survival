@@ -1,0 +1,4 @@
+body{background-image:linear-gradient(skyblue, lightgray);display:flex;flex-direction:column;align-items:center;height:100vh}body.start{background-image:linear-gradient(#ff9100, yellow)}body.gameover{background-image:linear-gradient(black, lightgray)}#canvas{border:25px solid gray}img{display:none}h1{font-size:45px;font-family:Arial, Helvetica, sans-serif;z-index:100}h1.start{color:yellow}h1.gameover{color:white}
+
+
+/*# sourceMappingURL=main.css.map*/
