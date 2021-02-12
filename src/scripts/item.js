@@ -11,7 +11,7 @@ const itemDimensions = [
 ]
 
 //this object will contain the only items that are rendered on the board at any given time, the max should be itemCount
-let fallingItems = {};
+export const fallingItems = {};
 
 export function drawItems(ctx, itemCount, gameWidth, gameHeight) {
   let items = itemDimensions;
@@ -27,14 +27,6 @@ export function drawItems(ctx, itemCount, gameWidth, gameHeight) {
       fallingItems[item].drawItems(ctx)
     }
   })
-  // if Object.keys(fallingItems.length < itemCount), add random item from itemDimension to fallingItems
-  // if Object.keys(fallingItems.length == itemCount)
-  // and if Object
-  // itemDimensions.forEach(item => {
-  //   fallingItems[item.name] ||= new Item(gameWidth, gameHeight)
-  //   fallingItems[item.name].update();
-  //   fallingItems[item.name].drawItems(ctx, item);
-  // })
 }
 
 class Item {
@@ -48,7 +40,7 @@ class Item {
       y: -(Math.floor(Math.random() * this.gameHeight))
     }
     this.speed = 0;
-    this.fallingSpeed = 3;
+    this.fallingSpeed = 4;
     this.status = 1;
     this.randomItem = randomItem;
   }
@@ -63,10 +55,10 @@ class Item {
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
         ctx.drawImage(
           pix,
-          x, y, //itemssheet x, y (top left corner of the grab)
-          grab, grab, // how big of a grab
-          this.position.x, this.position.y, // where you want the crop to be placed
-          this.width, this.height, // size of placement of what was grabbed
+          x, y, 
+          grab, grab, 
+          this.position.x, this.position.y, 
+          this.width, this.height, 
         )
       } else if (name == "github") {
         let pix = new Image();
@@ -99,11 +91,6 @@ class Item {
     this.position.y += this.fallingSpeed;
     if (this.position.y > this.gameHeight - this.height - 10) {
       this.status = 0;
-      // this.position.y = -(Math.floor(Math.random() * this.gameHeight));
-      // this.position.x = Math.floor(Math.random() * (this.gameWidth - this.width));
-      // this.status = 1;
     }
   }
 }
-
-// export default Item;

@@ -1,7 +1,7 @@
 import './styles/index.scss';
 import InputHandler from './scripts/input';
 import Sprite from './scripts/sprite';
-import {drawItems} from './scripts/item';
+import {fallingItems, drawItems} from './scripts/item';
 import Background from './scripts/background';
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -24,25 +24,19 @@ document.addEventListener("DOMContentLoaded", () => {
   new InputHandler(imgSprite);
 
 
+  function collisionDetection() {
+    Object.keys(fallingItems).forEach()
+  }
+
   function gameLoop(timestamp) {
     let deltaTime = timestamp - lastTime;
     lastTime = timestamp;
 
     ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
     bg.update(deltaTime);
-    // item1.update(deltaTime);
-    // item2.update(deltaTime);
-    // item3.update(deltaTime);
-    // item4.update(deltaTime);
     imgSprite.update(deltaTime);
     bg.draw(ctx, bgframes);
-    // item1.draw(ctx);
-    // item2.draw(ctx);
-    // item3.draw(ctx);
-    // item4.drawItems(ctx);
     drawItems(ctx, itemCount, GAME_WIDTH, GAME_HEIGHT)
-    // item.draw(ctx);
-    // item.drawItems(ctx);
     imgSprite.draw(ctx, frames);
     if (frames == 60) {
       frames = 0;
