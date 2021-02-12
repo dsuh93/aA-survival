@@ -1,6 +1,6 @@
 const itemDimensions = [
-  {name: "github", src: "./src/images/github.png"}, // +5 pts
-  {name: "kahoot", src: "./src/images/kahoot.png"}, // +5 pts
+  {name: "github", src: "src/images/github.png"}, // +5 pts
+  {name: "kahoot", src: "src/images/kahoot.png"}, // +5 pts
   {x: 256, y: 480, grab: 32, name: "croissant"}, // +5 pts
   {x: 0, y: 352, grab: 32, name: "coffee"}, // +3 sec
   {x: 256, y: 0, grab: 32, name: "laptop"}, // +10 pts
@@ -30,11 +30,11 @@ export function drawItems(ctx, itemCount, level, gameWidth, gameHeight) {
 }
 
 export function drawModalItems(ctx) {
-  debugger
   let cx = 100;
   let cy = 225;
   let items = itemDimensions;
   items.slice(0, 6).forEach(goodItem => {
+    debugger
     let {x, y, grab, name, src} = goodItem;
     let modalImg = new Image();
     if (src) {
@@ -44,28 +44,27 @@ export function drawModalItems(ctx) {
           modalImg,
           cx, cy,
           45, 45
-        )
-      }
-      if (name == "kahoot") {
+        );
+      } else if (name == "kahoot") {
         ctx.drawImage(
           modalImg,
           185, 160,
           210, 200,
           cx, cy,
           45, 45
-        )
+        );
       }
       cx += 70;
     } else {
-      modalImg.src = "./src/images/items.png";
+      modalImg.src = "src/images/items.png";
       ctx.drawImage(
         modalImg,
         x, y,
         grab, grab,
         cx, cy,
         45, 45,
-      )
-      cx += 70
+      );
+      cx += 70;
     }
   })
   cx = 100;
@@ -73,14 +72,14 @@ export function drawModalItems(ctx) {
   items.slice(6).forEach(badItem => {
     let {x, y, grab} = badItem;
     let modalImg = new Image();
-    modalImg.src = "./src/images/items.png";
+    modalImg.src = "src/images/items.png";
     ctx.drawImage(
       modalImg,
       x, y,
       grab, grab,
       cx, cy,
       45, 45
-    )
+    );
     cx += 70;
   })
 }
