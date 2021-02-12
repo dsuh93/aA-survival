@@ -73,8 +73,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function gameOver() {
-    clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-    alert("GAME OVER");
+    ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+    ctx.fillStyle = "skyblue";
+    ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+    alert(`GAME OVER!! Your score was: ${score}`);
   }
 
   function startGame() {
