@@ -7,12 +7,12 @@ class Sprite {
     this.height = 100;
     this.direction = "left";
     this.jumping = false;
-    this.maxSpeed = 14;
+    this.maxSpeed = 7;
     this.speed = 0;
     this.vertical = 0;
     this.constants = {
-      gravity: 1.7,
-      jumpSpeed: -25
+      gravity: 0.7,
+      jumpSpeed: -15
     }
 
     this.position = {
