@@ -3,7 +3,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 96vh;
+  height: 97.5vh;
 }
 
 body.start {
@@ -14,11 +14,10 @@ body.gameover {
   background-image: linear-gradient(black, lightgray);
 }
 
-i {
-  font-size: 30px;
+#play, #pause, .github, .linkedin, i, .fas, .fab {
+  height: 30px;
+  width: 30px;
 }
-
-
 
 .navbar {
   display: flex;
@@ -93,8 +92,12 @@ i {
     background-color: white;
     .github {
       color: black;
+
     }
-    
+    .github, .linkedin {
+      height: 30px;
+      width: 30px;
+    }
     .linkedin {
       color: navy;
     }
