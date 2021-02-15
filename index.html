@@ -7,11 +7,34 @@
     <link rel="stylesheet" href="./dist/main.css" />
     <title>JS Project Skeleton</title>
     <script src="./dist/main.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   </head>
 
   <body id="body">
-    <h1 id="title">App Academy Survival</h1>
-
+    <header>
+      <h1 id="title">App Academy Survival</h1>
+      <div class="navbar">
+        <div class="controls">
+          <div class="controls-container">
+            <button id="controls-button" class="controls-button">Controls</button>
+            <div id="controls-instructions" class="controls-instructions hidden">
+              <p>Use the left and right arrow keys to move side to side</p>
+              <p>Use the up arrow key to jump</p>
+              <p>Use the space bar to pause the game</p>
+              <p>Click on the play/pause to toggle music on or off</p>
+            </div>
+          </div>
+          <div id="music-button">
+            <i id="play" class="fas fa-play play"></i>
+            <i id="pause" class="fas fa-pause pause hidden"></i>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="https://github.com/dsuh93/aA-survival"><i class="fab fa-github github"></i></a>
+          <a href="https://www.linkedin.com/in/david-i-suh"><i class="fab fa-linkedin-in linkedin"></i></a>
+        </nav>
+      </div>
+    </header>
     <img id="lt-sprite-standing-1" src="./src/images/standing-1.png">
     <img id="lt-sprite-standing-2" src="./src/images/standing-2.png">
     <img id="rt-sprite-standing-1" src="./src/images/rt-standing-1.png">

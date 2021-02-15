@@ -3,7 +3,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  height: 96vh;
 }
 
 body.start {
@@ -13,6 +13,94 @@ body.start {
 body.gameover {
   background-image: linear-gradient(black, lightgray);
 }
+
+i {
+  font-size: 30px;
+}
+
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 20px;
+  display: flex;
+  #music-button {
+    display: flex;
+    padding: 10px;
+    width: fit-content;
+    height: fit-content;
+    background-color: white;
+  }
+  #play:hover, #pause:hover {
+    cursor: pointer;
+  }
+  #pause {
+    position: absolute;
+    right: 30px;
+  }
+  .hidden {
+    visibility: hidden;
+  }
+  .controls-container {
+    position: relative;
+    .controls-button {
+      padding: 10px;
+      margin: 15px;
+      font-size: 25px;
+      border: none;
+      background: white;
+      appearance: none;
+    }
+    .controls-button:hover {
+      cursor: pointer;
+    }
+    .controls-instructions {
+      font-size: 25px;
+      position: absolute;
+      width: 200px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 25px;
+      transition: all 0.5s ease-out;
+    }
+    .controls-instructions.hidden {
+      visibility: hidden;
+    }
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  a {
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    margin: 10px;
+    color: white;
+    text-decoration: none;
+    background-color: white;
+    .github {
+      color: black;
+    }
+    
+    .linkedin {
+      color: navy;
+    }
+  }
+}
+
 
 #canvas {
   border: 25px solid gray;
@@ -34,4 +122,13 @@ h1.start {
 
 h1.gameover {
   color: white;
+}
+
+#play {
+  position: relative;
+
+}
+
+.hidden {
+  visibility: hidden;
 }

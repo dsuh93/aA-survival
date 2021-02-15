@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const GAME_HEIGHT = 600;
 
   // variables
+  let bgMusic = new Audio("./src/sound/mixkit-rnb-224.mp3");
   let imgSprite = new Sprite(GAME_WIDTH, GAME_HEIGHT);
   let bg = new Background(GAME_WIDTH, GAME_HEIGHT);
   let score = new Score();
@@ -27,6 +28,51 @@ document.addEventListener("DOMContentLoaded", () => {
   new InputHandler(imgSprite);
   let body = document.getElementById("body");
   let title = document.getElementById("title");
+  let controlsButton = document.getElementById("controls-button");
+  let controlsInstructions = document.getElementById("controls-instructions");
+  let music = false;
+  let play = document.getElementById("play");
+  let pause = document.getElementById("pause");
+  let musicButton = document.getElementById("music-button");
+
+  musicButton.addEventListener("click", e => {
+    e.preventDefault();
+    if (music) {
+      music = false;
+      musicControl("pause");
+      
+    } else {
+      music = true;
+      musicControl("play");
+      
+    }
+  })
+  pause.addEventListener("click", e => {
+    e.preventDefault();
+  })
+
+  controlsButton.addEventListener("mouseover", e => {
+    e.preventDefault();
+    controlsInstructions.classList.remove("hidden");
+  })
+  controlsButton.addEventListener("mouseout", e => {
+    e.preventDefault();
+    controlsInstructions.classList.add("hidden");
+  })
+
+  function musicControl(action) {
+    if (action == "play") {
+      bgMusic.play();
+      pause.classList.add("hidden");
+      play.classList.remove("hidden");
+      bgMusic.loop = true;
+    } else if (action == "pause") {
+      bgMusic.pause();
+      pause.classList.remove("hidden");
+      play.classList.add("hidden");
+    }
+  }
+
 
   function drawLevel(ctx) {
     ctx.font = "20px Arial";
@@ -180,51 +226,30 @@ document.addEventListener("DOMContentLoaded", () => {
   
   
   document.addEventListener("keydown", e => {
-    debugger
     switch (e.key) {
       case "Enter":
-        debugger
         if (!animated && lives == 0) {
           document.location.reload();
         } else if (!animated) {
           startGame();
         }
+        if (!music) {
+          music = true;
+          musicControl("play");
+        }
         break;
       case " ":
-        debugger
         pauseGame();
+        if (music) {
+          music = false;
+          musicControl("pause");
+        } else {
+          music = true;
+          musicControl("play");
+        }
         break;
     }
   })
 
   drawModal(ctx);
 })
-
-// import './styles/index.scss';
-// import Game from './scripts/game';
-// import ModalItems from './scripts/modal';
-
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   let game = new Game();
-//   const modal = new ModalItems();
-//   modal.drawModalItems();
-//   const enter = document.getElementById("landing-modal");
-//   let enterCount = 0;
-//   document.addEventListener("keydown", e => {
-//     switch (e.key) {
-//       case "Enter":
-//         debugger
-//         enter.classList.add("hidden");
-//         if (enterCount <= 1) {
-//           enterCount += 1;
-//           game.startGame();
-//         }
-//         break;
-//       case " ":
-//         game.pauseGame();
-//         break;
-//     }
-//   })
-  
-// })
