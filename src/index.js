@@ -40,16 +40,34 @@ document.addEventListener("DOMContentLoaded", () => {
     if (music) {
       music = false;
       musicControl("pause");
-      
+      toggleMusicIcon("pause");
     } else {
       music = true;
       musicControl("play");
-      
+      toggleMusicIcon("play");
     }
   })
-  pause.addEventListener("click", e => {
-    e.preventDefault();
-  })
+
+  function toggleMusicIcon(action) {
+    if (action === "play") {
+      debugger
+      pause.classList.remove("hidden");
+      play.classList.add("hidden");
+    } else {
+      debugger
+      pause.classList.add("hidden");
+      play.classList.remove("hidden");
+    }
+  }
+
+  function musicControl(action) {
+    if (action === "play") {
+      bgMusic.loop = true;
+      bgMusic.play();
+    } else if (action === "pause") {
+      bgMusic.pause();
+    }
+  }
 
   controlsButton.addEventListener("mouseover", e => {
     e.preventDefault();
@@ -59,20 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     controlsInstructions.classList.add("hidden");
   })
-
-  function musicControl(action) {
-    if (action == "play") {
-      bgMusic.play();
-      pause.classList.add("hidden");
-      play.classList.remove("hidden");
-      bgMusic.loop = true;
-    } else if (action == "pause") {
-      bgMusic.pause();
-      pause.classList.remove("hidden");
-      play.classList.add("hidden");
-    }
-  }
-
 
   function drawLevel(ctx) {
     ctx.font = "20px Arial";
@@ -99,9 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
       let w = sprite.width;
       let h = sprite.height;
       if (item.status == 1) {
-        for (let i = x; i < ((x + w) - 25); i++) {
-          for (let j = y; j < ((y + h) - 25); j ++) {
-            if ((i + 25) > ix && (i + 25) < (ix + iw) && (j + 25) > iy && (j + 25) < (iy + ih)) {
+        for (let i = (x + 25); i < ((x + w) - 25); i++) {
+          for (let j = (y + 25); j < ((y + h) - 25); j ++) {
+            if (i > ix && i < (ix + iw) && j > iy && j < (iy + ih)) {
               item.status = 0;
               score.scoreCount(item);
               if (item.name == "exam") {
@@ -149,9 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function pauseGame() {
-    debugger
     if (animated) {
-      debugger
       animated = false;
       pauseModal = true;
       drawModal(ctx);
@@ -192,7 +194,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function drawModal(ctx) {
-    debugger
     if (!animated && landingModal) {
       ctx.fillStyle = "skyblue";
       ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
@@ -206,7 +207,6 @@ document.addEventListener("DOMContentLoaded", () => {
       ctx.fillText("Hit Enter to start!!", 100, 500)
       drawModalItems(ctx);
     } else if (!animated && pauseModal) {
-      debugger
       ctx.fillStyle = "rgba(0, 0, 0, 0.3";
       ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
       ctx.fill();

@@ -32,7 +32,6 @@ export function drawItems(ctx, itemCount, level, gameWidth, gameHeight) {
 export function drawModalItems(ctx) {
   let items = itemDimensions;
   items.slice(0, 6).forEach((goodItem, i) => {
-    debugger
     let {x, y, grab, name, src} = goodItem;
     let modalImg = new Image();
     if (src) {
