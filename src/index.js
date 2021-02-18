@@ -232,11 +232,11 @@ document.addEventListener("DOMContentLoaded", () => {
           document.location.reload();
         } else if (!animated) {
           startGame();
-        }
-        if (!music) {
-          music = true;
-          musicControl("play");
-          toggleMusicIcon("play");
+          if (!music) {
+            music = true;
+            musicControl("play");
+            toggleMusicIcon("play");
+          }
         }
         break;
       case " ":
