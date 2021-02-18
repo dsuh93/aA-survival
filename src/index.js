@@ -243,9 +243,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (music) {
           music = false;
           musicControl("pause");
+          toggleMusicIcon("pause");
         } else {
           music = true;
           musicControl("play");
+          toggleMusicIcon("play");
         }
         break;
     }
