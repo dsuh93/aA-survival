@@ -236,6 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!music) {
           music = true;
           musicControl("play");
+          toggleMusicIcon("play");
         }
         break;
       case " ":
