@@ -1,5 +1,7 @@
 # aA-survival
 
+![game-play](https://github.com/dsuh93/aA-survival/blob/main/src/images/AAsurvivalgif.gif)
+
 # Background
 aA Survival is a classic game of items dropping and you either avoid them or catch them.
 The theme is a retro 16-bit style where an App Academy student tries to get the highest score while staying alive.
@@ -46,5 +48,5 @@ This project implements the following technologies:
   - HTML and CSS for structure and styling
 
 #Credits
-  - item sprites were courtesy of VECTORPIXELSTAR: !(link)[https://vectorpixelstar.itch.io/mega-pixel-art-32x32-px-icons-sprite-sheet]
+  - item sprites were courtesy of VECTORPIXELSTAR: [link](https://vectorpixelstar.itch.io/mega-pixel-art-32x32-px-icons-sprite-sheet)
    
