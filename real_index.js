@@ -5,6 +5,7 @@ import {fallingItems, drawItems} from './scripts/item';
 import Background from './scripts/background';
 import Score from './scripts/score';
 import {drawModal} from './scripts/modal';
+import * as game from './scripts/game';
 
 document.addEventListener("DOMContentLoaded", () => {
   let canvas = document.getElementById("canvas");

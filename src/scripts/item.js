@@ -40,7 +40,7 @@ export function drawModalItems(ctx) {
         if (name == "github") {
           ctx.drawImage(
             modalImg,
-            100 + (70 * i), 225,
+            100 + (70 * i), 325,
             45, 45
           );
         } else if (name == "kahoot") {
@@ -48,7 +48,7 @@ export function drawModalItems(ctx) {
             modalImg,
             185, 160,
             210, 200,
-            100 + (70 * i), 225,
+            100 + (70 * i), 325,
             45, 45
           );
         }
@@ -60,7 +60,7 @@ export function drawModalItems(ctx) {
           modalImg,
           x, y,
           grab, grab,
-          100 + (70 * i), 225,
+          100 + (70 * i), 325,
           45, 45,
         );
       }
@@ -75,7 +75,7 @@ export function drawModalItems(ctx) {
         modalImg,
         x, y,
         grab, grab,
-        100 + (70 * i), 325,
+        100 + (70 * i), 430,
         45, 45
       );
     }
