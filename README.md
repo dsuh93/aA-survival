@@ -20,8 +20,7 @@ Items that are included are:
     - error: -5 points
     - hacker: -1 life
     
-Game difficulty will be incremented via number of items and speed at which they fall.
-Difficulty rises with each exam that the player catches.
+Difficulty rises with each exam the user catches via increasing number of items on the screen.
 
 # Functionality & MVP
 Users will be able to:
@@ -34,12 +33,47 @@ This project will also include:
   - links to github/linkedin
   - a production README
 
-# Wireframes
-This app will exist on a single screen. The landing page will include the title of the game, and external links to github and linkedin.
-There will also be a toggle for music and level difficulty, and a button to display instructions and a button to start the game.
-The controls for moving the character will be key strokes of W, A, and D, which will have the sprite jump, move left, and move right respectively.
-User can also hit spacebar to pause the game. 
-![wireframe](https://github.com/dsuh93/aA-survival/blob/main/src/images/wireframe.PNG)
+# Collision Detection
+  - A particularly interesting section of code includes the collision detection algorithm, using position of images on the canvas to change the score and status of items on the screen:
+```javascript
+function collisionDetection() {
+    Object.keys(fallingItems).forEach(key => {
+      let item = fallingItems[key];
+      let ix = item.position.x;
+      let iy = item.position.y;
+      let iw = item.width;
+      let ih = item.height;
+      let sprite = imgSprite;
+      let x = sprite.position.x;
+      let y = sprite.position.y;
+      let w = sprite.width;
+      let h = sprite.height;
+      if (item.status == 1) {
+        for (let i = (x + 25); i < ((x + w) - 25); i++) {
+          for (let j = (y + 25); j < ((y + h) - 25); j ++) {
+            if (i > ix && i < (ix + iw) && j > iy && j < (iy + ih)) {
+              item.status = 0;
+              score.scoreCount(item);
+              if (item.name == "exam") {
+                level++;
+                itemCount += 1;
+                item.fallingSpeed++;
+              }
+              if (item.name == "hacker") {
+                lives--;
+                if (lives == 0) {
+                  gameOver();
+                }
+              }
+              break;
+            }
+          }
+          if (item.status == 0) break;
+        }
+      }
+    })
+  }
+```
 
 # Architecture and Technologies
 This project implements the following technologies:
@@ -49,4 +83,5 @@ This project implements the following technologies:
 
 #Credits
   - item sprites were courtesy of VECTORPIXELSTAR: [link](https://vectorpixelstar.itch.io/mega-pixel-art-32x32-px-icons-sprite-sheet)
+  - background music: RnB by Arulo [link](https://mixkit.co/free-stock-music/tag/lo-fi/)
    
