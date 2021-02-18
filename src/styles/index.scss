@@ -41,7 +41,7 @@ body.gameover {
   #play:hover, #pause:hover {
     cursor: pointer;
   }
-  .hidden {
+  #play-icon.hidden, #pause-icon.hidden {
     visibility: hidden;
   }
   #pause {

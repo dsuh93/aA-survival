@@ -31,8 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let controlsButton = document.getElementById("controls-button");
   let controlsInstructions = document.getElementById("controls-instructions");
   let music = false;
-  let play = document.getElementById("play");
-  let pause = document.getElementById("pause");
+  let play = document.getElementById("play-icon");
+  let pause = document.getElementById("pause-icon");
   let musicButton = document.getElementById("music-button");
 
   musicButton.addEventListener("click", e => {
