@@ -51,11 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function toggleMusicIcon(action) {
     if (action === "play") {
-      debugger
       pause.classList.remove("hidden");
       play.classList.add("hidden");
     } else {
-      debugger
       pause.classList.add("hidden");
       play.classList.remove("hidden");
     }

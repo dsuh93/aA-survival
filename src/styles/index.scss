@@ -21,8 +21,8 @@ body.gameover {
 }
 
 #play, #pause, .github, .linkedin, i, .fas, .fab {
-  height: 30px;
-  width: 30px;
+  height: 23px;
+      width: 23px;
 }
 
 .navbar {
@@ -41,7 +41,7 @@ body.gameover {
     display: flex;
     padding: 10px;
     width: fit-content;
-    height: 30px;
+    height: 23px;
     background-color: white;
   }
   #play:hover, #pause:hover {
@@ -58,8 +58,8 @@ body.gameover {
     position: relative;
     .controls-button {
       padding: 10px;
-      margin: 15px;
-      font-size: 25px;
+      margin-right: 15px;
+      font-size: 20px;
       font-weight: bold;
       border: none;
       background: white;
@@ -72,6 +72,7 @@ body.gameover {
       font-size: 20px;
       font-family: Arial, Helvetica, sans-serif;
       position: absolute;
+      left: -45px;
       width: 485px;
       color: white;
       background-color: rgba(0, 0, 0, 0.9);
@@ -103,23 +104,22 @@ body.gameover {
 
     }
     .github, .linkedin {
-      height: 30px;
-      width: 30px;
+      height: 23px;
+      width: 23px;
     }
     .linkedin {
       color: navy;
     }
   }
   #about {
-    font-size: 25px;
+    font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
   }
 }
 
-
 #canvas {
-  border: 25px solid gray;
+  border: 3px solid white;
 }
 
 img {
