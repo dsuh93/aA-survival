@@ -5,7 +5,7 @@ html, body {
 
 body {
   background-image: linear-gradient(skyblue, lightgray);
-  object-fit: cover;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
