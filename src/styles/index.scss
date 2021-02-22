@@ -1,9 +1,15 @@
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
 body {
   background-image: linear-gradient(skyblue, lightgray);
+  object-fit: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 98.3vh;
+  height: 100%;
 }
 
 body.start {
@@ -115,9 +121,11 @@ img {
 }
 
 h1 {
-  font-size: 45px;
+  font-size: 40px;
   font-family: Arial, Helvetica, sans-serif;
   z-index: 100;
+  margin-top: 15px;
+  margin-bottom: 0px;
 }
 
 h1.start {
@@ -128,15 +136,6 @@ h1.gameover {
   color: white;
 }
 
-footer {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
-  position: absolute;
-  bottom: 0;
-  p {
-    font-size: 20px;
-  }
-}
 
 
 
